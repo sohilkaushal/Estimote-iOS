@@ -24,7 +24,6 @@
 		68897A1E1E108C76C10AF451 /* beacons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = beacons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68897A4C4822DB0F5033D425 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68897D4224A3BB831125D753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
-		7B283DC323289865000770CB /* ObjcBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcBridgingHeader.h; sourceTree = "<group>"; };
 		E06F3DCD9C6C05CFC5D5A141 /* Pods_beacons.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_beacons.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA7C41AF7B0987F17248DDA /* Pods-beacons.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beacons.debug.xcconfig"; path = "Target Support Files/Pods-beacons/Pods-beacons.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,7 +64,6 @@
 		688979B6C99BB14E6047E6C9 = {
 			isa = PBXGroup;
 			children = (
-				7B283DC323289865000770CB /* ObjcBridgingHeader.h */,
 				68897414B54B654817F4DA13 /* Products */,
 				68897302F4493895C0DAC505 /* beacons */,
 				9E7901E5BE18041070BB2DE0 /* Pods */,
@@ -102,6 +100,7 @@
 				68897C6FC841D2B925858FFE /* Sources */,
 				68897B90FBCD9A68C2A641AB /* Frameworks */,
 				6889735207C762ADC9C1F277 /* Resources */,
+				21D6B98F415760BE7070AF70 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -119,6 +118,16 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = "Sohil Kaushal";
+				TargetAttributes = {
+					68897CEDCC7FA6A6EB5AC662 = {
+						DevelopmentTeam = B47T7738W2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = 688973CD9718D4EEAA4DF038 /* Build configuration list for PBXProject "beacons" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -153,6 +162,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		21D6B98F415760BE7070AF70 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-beacons/Pods-beacons-frameworks.sh",
+				"${PODS_ROOT}/EstimoteBluetoothScanning/EstimoteBluetoothScanning/EstimoteBluetoothScanning.framework",
+				"${PODS_ROOT}/EstimoteProximitySDK/EstimoteProximitySDK/EstimoteProximitySDK.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EstimoteBluetoothScanning.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EstimoteProximitySDK.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-beacons/Pods-beacons-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4F389D2772DE524467B1902D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -268,11 +297,12 @@
 			baseConfigurationReference = 27E410BF232A4C199C4400C2 /* Pods-beacons.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = B47T7738W2;
 				INFOPLIST_FILE = beacons/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sohil.beacons;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = ObjcBridgingHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -344,11 +374,12 @@
 			baseConfigurationReference = FCA7C41AF7B0987F17248DDA /* Pods-beacons.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = B47T7738W2;
 				INFOPLIST_FILE = beacons/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sohil.beacons;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = ObjcBridgingHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
