@@ -9,60 +9,35 @@
 import UIKit
 import UserNotifications
 
+import EstimoteProximitySDK
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    let beaconManager = ESTBeaconManager()
-    let beetrootUUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D"
-
+    
+    var proximityObserver: ProximityObserver!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-        self.beaconManager.delegate = self
-        self.beaconManager.requestAlwaysAuthorization()
-
-        self.beaconManager.startMonitoring(for: CLBeaconRegion(proximityUUID: UUID(uuidString: beetrootUUID)!,
-                major: 30154, minor: 54532, identifier: "my desk"))
-
-        let notifications = UNUserNotificationCenter.current()
-        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-
-        notifications.requestAuthorization(options: options) { (granted, error) in
-            if granted {
-                DispatchQueue.main.async {
-                    application.registerForRemoteNotifications()
-                }
-            }
+        let cloudCredentials = CloudCredentials(appID: "ios-notification-5np",
+                                                appToken: "e0e4ce45083bed89e656e583e230ebee")
+        self.proximityObserver = ProximityObserver(credentials: cloudCredentials, onError: { (error) in
+            print("Error in ProximityObserver \(error)")
+        })
+        
+        let zone = ProximityZone(tag: "WorkDesk", range: .near)
+        zone.onEnter = { context in
+            let deskOwner = context.attachments["desk-owner"]
+            print("Welcome to \(String(describing: deskOwner))'s desk")
         }
+        
+        zone.onExit = { _ in
+            print("Bye Bye")
+        }
+        
+        self.proximityObserver.startObserving([zone])
         return true
-    }
-
-    func showNotifications(with title: String, body: String) {
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = body
-        content.badge = 1
-        content.sound = UNNotificationSound.default
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-
-        let request = UNNotificationRequest(identifier: "Local Notification", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error Detected: \(error)")
-            }
-        }
-    }
-
-    func beaconManager(_ manager: Any, didEnter region: CLBeaconRegion) {
-        print("A user entered the region")
-        showNotifications(with: "Entered", body: "We have detected that you are near a beacon")
-    }
-
-    func beaconManager(_ manager: Any, didExitRegion region: CLBeaconRegion) {
-        print("A user exited the region: \(region)")
-        showNotifications(with: "Exit", body: "We have detected that you are exiting the beacon region")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -92,7 +67,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
-
 }

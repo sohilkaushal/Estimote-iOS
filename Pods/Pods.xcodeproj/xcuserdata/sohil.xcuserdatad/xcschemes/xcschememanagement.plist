@@ -4,22 +4,23 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>EstimoteSDK.xcscheme</key>
+		<key>EstimoteBluetoothScanning.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>1</integer>
+			<false/>
+		</dict>
+		<key>EstimoteProximitySDK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-beacons.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>2</integer>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict />
+	<dict/>
 </dict>
 </plist>
